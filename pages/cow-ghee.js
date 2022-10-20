@@ -2,7 +2,6 @@ import React from "react";
 import Layout from "../components/Layout";
 import ProductCarousel from "../sections/ProductCarousel";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
-import Select from "../sections/Select";
 
 const Cowghee = () => {
   return (

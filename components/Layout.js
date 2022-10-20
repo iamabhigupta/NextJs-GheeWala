@@ -9,8 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Store } from "../utils/Store";
 import { HiShoppingCart, HiUserCircle } from "react-icons/hi";
 import Footer from "./Footer";
-import { Menu } from "@headlessui/react";
-import DropdownLink from "./DropdownLink";
 import { AiOutlineLogin } from "react-icons/ai";
 
 export default function Layout({ title, children }) {
@@ -41,7 +39,7 @@ export default function Layout({ title, children }) {
       <ToastContainer position="bottom-center" limit={1} />
 
       <div className="">
-        <header className="shadow-md bg-darkGreen">
+        <header className="shadow-2xl bg-darkGreen sticky top-0 z-50">
           <nav className="flex h-20 items-center px-4 md:px-0 container mx-auto justify-between ">
             <div className="flex justify-center items-center gap-14">
               <Link href="/" passHref>

@@ -10,7 +10,7 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
 
-export default function ProductCarousel() {
+export default function ProductCarousel({ product }) {
   return (
     <div className="2xl:mx-auto 2xl:container flex justify-center">
       <div className="2xl:px-20 px-6 w-full lg:w-5/6">
@@ -126,13 +126,13 @@ export default function ProductCarousel() {
             </ButtonBack>
             <Slider>
               <Slide className="carousel__inner-slideLarge" index={0}>
-                <img src="/images/product1.png" alt="" />
+                <img src={product.image} alt={product.name} />
               </Slide>
               <Slide className="carousel__inner-slideLarge" index={0}>
-                <img src="/images/product1.png" alt="" />
+                <img src={product.image} alt={product.name} />
               </Slide>
-              <Slide className="carousel__inner-slideLarge" index={1}>
-                <img src="/images/product1.png" alt="" />
+              <Slide className="carousel__inner-slideLarge" index={0}>
+                <img src={product.image} alt={product.name} />
               </Slide>
             </Slider>
             <ButtonNext

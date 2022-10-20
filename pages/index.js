@@ -4,7 +4,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import Layout from "../components/Layout";
-import ProductItem from "../components/ProductItem";
+// import ProductItem from "../components/ProductItem";
 import Product from "../models/Product";
 import db from "../utils/db";
 import { Store } from "../utils/Store";
@@ -14,6 +14,7 @@ import Carousel from "../components/Carousel";
 // Icons Import
 import { FaFilter, FaHeartbeat, FaStar, FaStarHalf } from "react-icons/fa";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import Link from "next/link";
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
@@ -31,6 +32,7 @@ export default function Home({ products }) {
 
     toast.success("Product added to the cart");
   };
+  console.log(products);
 
   return (
     <Layout title="Home Page">
@@ -50,9 +52,9 @@ export default function Home({ products }) {
               VEDIC <br /> BILONA <br /> GHEE
             </h1>
             <p className="mb-8 text-xl">
-              100% Pure Grass fed A2 Gir Cow's hand churned Ghee is typically
-              prepared by simmering butter, which is churned from cultured curd
-              (traditionally made dahi).
+              100% Pure Grass fed A2 Gir Cow&#39;s hand churned Ghee is
+              typically prepared by simmering butter, which is churned from
+              cultured curd (traditionally made dahi).
             </p>
             <div className="flex justify-center align-center gap-5 ">
               <button className="primary-button">COW GHEE</button>
@@ -86,9 +88,15 @@ export default function Home({ products }) {
               <div className="flex flex-wrap -m-2 relative">
                 <div className="h-48 bg-darkGreen rounded-t-3xl w-full absolute top-40"></div>
                 <div className="p-2 lg:w-1/2 md:w-1/2 w-full z-10">
-                  <div className="flex justify-center items-center">
-                    <img src="/images/product1.png" className="h-96" alt="" />
-                  </div>
+                  <Link href={`/product/${products[0].slug}`} passHref>
+                    <div className="flex justify-center items-center ">
+                      <img
+                        src={products[0].image}
+                        alt={products[0].name}
+                        className="h-96 cursor-pointer"
+                      />
+                    </div>
+                  </Link>
                   <div className="flex gap-1 text-yellow justify-center items-center mb-5">
                     <FaStar />
                     <FaStar />
@@ -97,21 +105,34 @@ export default function Home({ products }) {
                     <FaStarHalf />
                     <p className="text-white">(15)</p>
                   </div>
-                  <h3 className="text-3xl text-center mb-3 font-semibold">
-                    Pure Buffalo Ghee
-                  </h3>
+                  <Link href={`/product/${products[0].slug}`} passHref>
+                    <h3 className="text-3xl text-center mb-3 font-semibold hover:underline cursor-pointer">
+                      {products[0].name}
+                    </h3>
+                  </Link>
                   <p className="text-lg text-center mb-5 md:mx-10">
                     Delicious ghee ethically prepared from enzyme-rich yoghurt
                     of pure breed buffalos
                   </p>
                   <div className="flex justify-center items-center">
-                    <button className="primary-button">Add To Cart</button>
+                    <button
+                      className="primary-button"
+                      onClick={() => addToCartHandler(products[0])}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
                 <div className="p-2 lg:w-1/2 md:w-1/2 w-full z-10">
-                  <div className="flex justify-center items-center">
-                    <img src="/images/product1.png" className="h-96" alt="" />
-                  </div>
+                  <Link href={`/product/${products[1].slug}`} passHref>
+                    <div className="flex justify-center items-center ">
+                      <img
+                        src={products[1].image}
+                        alt={products[1].name}
+                        className="h-96 cursor-pointer"
+                      />
+                    </div>
+                  </Link>
                   <div className="flex gap-1 text-yellow justify-center items-center mb-5">
                     <FaStar />
                     <FaStar />
@@ -120,15 +141,22 @@ export default function Home({ products }) {
                     <FaStarHalf />
                     <p className="text-white">(15)</p>
                   </div>
-                  <h3 className="text-3xl text-center mb-3 font-semibold">
-                    Pure Buffalo Ghee
-                  </h3>
+                  <Link href={`/product/${products[1].slug}`} passHref>
+                    <h3 className="text-3xl text-center mb-3 font-semibold hover:underline cursor-pointer">
+                      {products[1].name}
+                    </h3>
+                  </Link>
                   <p className="text-lg text-center mb-5 md:mx-10">
                     Delicious ghee ethically prepared from enzyme-rich yoghurt
                     of pure breed buffalos
                   </p>
                   <div className="flex justify-center items-center">
-                    <button className="primary-button">Add To Cart</button>
+                    <button
+                      className="primary-button"
+                      onClick={() => addToCartHandler(products[1])}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </div>

@@ -1,13 +1,15 @@
-import axios from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
-import { toast } from 'react-toastify';
-import Layout from '../../components/Layout';
-import Product from '../../models/Product';
-import db from '../../utils/db';
-import { Store } from '../../utils/Store';
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
+import Layout from "../../components/Layout";
+import Product from "../../models/Product";
+import db from "../../utils/db";
+import { Store } from "../../utils/Store";
+
+import { BsStarFill, BsStarHalf } from "react-icons/bs";
+import ProductCarousel from "../../sections/ProductCarousel";
 
 export default function ProductScreen(props) {
   const { product } = props;
@@ -23,19 +25,50 @@ export default function ProductScreen(props) {
     const { data } = await axios.get(`/api/products/${product._id}`);
 
     if (data.countInStock < quantity) {
-      return toast.error('Sorry. Product is out of stock');
+      return toast.error("Sorry. Product is out of stock");
     }
 
-    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
-    router.push('/cart');
+    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
+    router.push("/cart");
   };
 
   return (
     <Layout title={product.name}>
-      <div className="py-2">
-        <Link href="/">back to products</Link>
-      </div>
-      <div className="grid md:grid-cols-4 md:gap-3">
+      <section className="text-white bg-lightGreen">
+        <div className="container mx-auto px-5 py-12 grid grid-cols-1 md:grid-cols-2">
+          <ProductCarousel product={product} />
+          <div className="space-y-3 px-5 pt-20">
+            <h3 className="text-5xl font-bold mb-2">{product.name}</h3>
+            <div className="flex gap-1 justify-between text-yellow">
+              <Link href={"/"} passHref>
+                <p className="text-lg cursor-pointer">Ghee Wala</p>
+              </Link>
+              <div className="flex gap-1">
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarHalf />
+              </div>
+            </div>
+            <p className="text-xl">{product.description}</p>
+            {/* <p className="text-darkGreen">Ghee Wala</p> */}
+            <div className="flex justify-between gap-1">
+              <h3 className="text-4xl font-semibold mb-4 mt-4">
+                ₹{product.price}
+              </h3>
+              {/* <Select /> */}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-3 md:my-5 text-darkGreen">
+              <button className="primary-button" onClick={addToCartHandler}>
+                Add To Cart
+              </button>
+              {/* <button className="primary-button">Buy Now</button> */}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <div className="grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}
@@ -66,7 +99,7 @@ export default function ProductScreen(props) {
             </div>
             <div className="mb-2 flex justify-between">
               <div>Status</div>
-              <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>
+              <div>{product.countInStock > 0 ? "In stock" : "Unavailable"}</div>
             </div>
             <button
               className="primary-button w-full"
@@ -76,7 +109,7 @@ export default function ProductScreen(props) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 }
